@@ -1,4 +1,5 @@
-#include "main.h"
+#define _POSIX_C_SOURCE 200809L
+#include "rsa.h"
 
 /**
  * main - entry function
@@ -12,13 +13,15 @@ int main(int ac, char **av)
 	size_t i = 0;
 	char *buffer;
 	char *num;
+	long int v_num;
+	int c;
 
 	if (ac != 2)
 	{
-		fprints(stderr, "USAGE: factors file\n");
+		fprintf(stderr, "USAGE: factors file\n");
 		exit(EXIT_FAILURE);
 	}
-	fptr - fopen(av[1], "r");
+	fptr = fopen(av[1], "r");
 	if (fptr == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
@@ -29,7 +32,17 @@ int main(int ac, char **av)
 		num = strtok(buffer, " \n");
 		if (num != NULL)
 		{
-			continue;
+			v_num = atoi(num);
+			c = 2;
+			while (c < v_num)
+			{
+				if (v_num % c == 0)
+				{
+					printf("%ld=%ld*%d\n", v_num, v_num / c, c);
+					break;
+				}
+				c++;
+			}
 		}
 	}
 	fclose(fptr);
