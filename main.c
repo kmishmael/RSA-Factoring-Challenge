@@ -13,7 +13,7 @@ int main(int ac, char **av)
 	size_t i = 0;
 	char *buffer;
 	char *num;
-	long int v_num;
+	long long int v_num;
 	int c;
 
 	if (ac != 2)
@@ -32,13 +32,13 @@ int main(int ac, char **av)
 		num = strtok(buffer, " \n");
 		if (num != NULL)
 		{
-			v_num = atoi(num);
+			v_num = atol(num);
 			c = 2;
 			while (c < v_num)
 			{
 				if (v_num % c == 0)
 				{
-					printf("%ld=%ld*%d\n", v_num, v_num / c, c);
+					printf("%lld=%lld*%d\n", v_num, v_num / c, c);
 					break;
 				}
 				c++;
